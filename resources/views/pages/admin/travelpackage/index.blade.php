@@ -44,7 +44,7 @@
                                 <td>{{ $item->departure_date }}</td>
                                 <td>{{ $item->price }}</td>
                                 <td class="text-center">
-                                    <a href="" class="btn btn-info">
+                                    <a href="{{ route('travelpackage.edit',$item->id) }}" class="btn btn-info">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
                                 </td>
