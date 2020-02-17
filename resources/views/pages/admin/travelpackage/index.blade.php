@@ -49,7 +49,7 @@
                                     </a>
                                 </td>
                                 <td class="text-center">
-                                    <form action="" method="post">
+                                    <form action="{{ route('travelpackage.destroy',$item->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">

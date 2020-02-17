@@ -95,6 +95,8 @@ class TravelPackageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = TravelPackage::findOrFail($id);
+        $item->delete();
+        return redirect()->route('travelpackage.index');
     }
 }
