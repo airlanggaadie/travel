@@ -26,4 +26,5 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth','admin'])->group(
 {
     Route::get('/','DashboardController@index')->name('dashboard');
     Route::resource('travelpackage', 'TravelPackageController');
+    Route::resource('gallery','GalleryController');
 });
