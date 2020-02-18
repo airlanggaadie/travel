@@ -12,4 +12,9 @@ class Gallery extends Model
     protected $fillable = [
         'travelpackages_id','image'
     ];
+
+    public function travelpackages()
+    {
+        return $this->belongsTo(TravelPackage::class,'travelpackages_id');
+    }
 }
