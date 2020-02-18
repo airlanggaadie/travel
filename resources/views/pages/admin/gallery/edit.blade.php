@@ -23,53 +23,24 @@
 
         <div class="card shadow">
             <div class="card-body">
-                <form action="{{ route('gallery.update', $item->id) }}" method="post">
+                <form action="{{ route('gallery.update',$gallery->id) }}" method="post" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-                    
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" name="title" value="{{ $item->travelpackages->title }}">
+                        <label for="travelpackages_id">Paket Travel</label>
+                        <select name="travelpackages_id" required>
+                            <option value="">Pilih Paket Travel</option>
+                            @foreach ($travelpackages as $item)                            
+                                <option value="{{ $item->id }}" {{ $gallery->travelpackages_id == $item->id ? 'selected' : '' }}>{{ $item->title }}</option>    
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="location">Location</label>
-                        <input type="text" class="form-control" name="location" value="{{ $item->location }}">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control" name="image" placeholder="Masukkan Gambar">
+                        <img src="{{ Storage::url($gallery->image) }}" alt="gambar" width="150px" class="img-thumbnail">
                     </div>
-                    {{-- 
-                        <div class="form-group">
-                            <label for="about">About</label>
-                            <input type="text" class="form-control" name="about" value="{{ $item->about }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="featured_event">Featured Event</label>
-                            <input type="text" class="form-control" name="featured_event" value="{{ $item->featured_event }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="language">Language</label>
-                            <input type="text" class="form-control" name="language" value="{{ $item->language }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="foods">Foods</label>
-                            <input type="text" class="form-control" name="foods" value="{{ $item->foods }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="departure_date">Departure Date</label>
-                            <input type="date" class="form-control" name="departure_date" value="{{ $item->departure_date }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="duration">Duration</label>
-                            <input type="text" class="form-control" name="duration" value="{{ $item->duration }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="type">Type</label>
-                            <input type="text" class="form-control" name="type" value="{{ $item->type }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="text" class="form-control" name="price" value="{{ $item->price }}">
-                        </div> 
-                    --}}
-                    <button type="submit" class="btn btn-primary btn-block">Edit</button>
+                    <button type="submit" class="btn btn-primary btn-block">Save</button>
                 </form>
             </div>
         </div>

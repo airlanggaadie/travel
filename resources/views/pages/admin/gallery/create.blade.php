@@ -23,50 +23,21 @@
 
         <div class="card shadow">
             <div class="card-body">
-                <form action="{{ route('travelpackage.store') }}" method="post">
+                <form action="{{ route('gallery.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                        <label for="travelpackages_id">Paket Travel</label>
+                        <select name="travelpackages_id" required>
+                            <option value="">Pilih Paket Travel</option>
+                            @foreach ($travelpackages as $item)
+                                <option value="{{ $item->id }}">{{ $item->title }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="location">Location</label>
-                        <input type="text" class="form-control" name="location" value="{{ old('location') }}">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control" name="image" placeholder="Masukkan Gambar">
                     </div>
-                    {{-- 
-                        <div class="form-group">
-                            <label for="about">About</label>
-                            <input type="text" class="form-control" name="about" value="{{ old('about') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="featured_event">Featured Event</label>
-                            <input type="text" class="form-control" name="featured_event" value="{{ old('featured_event') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="language">Language</label>
-                            <input type="text" class="form-control" name="language" value="{{ old('language') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="foods">Foods</label>
-                            <input type="text" class="form-control" name="foods" value="{{ old('foods') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="departure_date">Departure Date</label>
-                            <input type="date" class="form-control" name="departure_date" value="{{ old('departure_date') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="duration">Duration</label>
-                            <input type="text" class="form-control" name="duration" value="{{ old('duration') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="type">Type</label>
-                            <input type="text" class="form-control" name="type" value="{{ old('type') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="text" class="form-control" name="price" value="{{ old('price') }}">
-                        </div>
-                     --}}
                     <button type="submit" class="btn btn-primary btn-block">Save</button>
                 </form>
             </div>

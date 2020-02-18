@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Gallery;
 use App\Http\Requests\Admin\GalleryRequest;
+use App\TravelPackage;
+use File;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -26,7 +29,10 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.gallery.create');
+        $travelpackages = TravelPackage::all();
+        return view('pages.admin.gallery.create',[
+            'travelpackages' => $travelpackages
+        ]);
     }
 
     /**
@@ -38,6 +44,7 @@ class GalleryController extends Controller
     public function store(GalleryRequest $request)
     {
         $data = $request->all();
+        $data['image'] = $request->file('image')->store('assets/gallery','public');
 
         Gallery::create($data);
         return redirect()->route('gallery.index');
@@ -62,9 +69,13 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        $item = Gallery::findOrFail($id);
-
-        return view('pages.admin.gallery.edit',['item' => $item]);
+        $gallery = Gallery::with('travelpackages')->findOrFail($id);
+        $travelpackages = TravelPackage::all();
+        
+        return view('pages.admin.gallery.edit',[
+            'gallery' => $gallery,
+            'travelpackages' => $travelpackages
+            ]);
     }
 
     /**
@@ -77,8 +88,12 @@ class GalleryController extends Controller
     public function update(GalleryRequest $request, $id)
     {
         $data = $request->all();
+        $data['image'] = $request->file('image')->store('assets/gallery','public');
 
-        $item =  Gallery::findOrFail($id);
+        $item = Gallery::findOrFail($id);
+        // dd($item->image);
+        // Storage::delete(asset('storage/assets/gallery/ynUpeqEjkDTscIxp7NhUoUbtWqioGC6o28ZH75aK.jpeg'));
+        File::delete('storage/'.$item->image);
         $item->update($data);
         return redirect()->route('gallery.index');
     }
