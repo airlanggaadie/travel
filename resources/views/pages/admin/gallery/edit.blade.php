@@ -31,7 +31,7 @@
                         <select name="travelpackages_id" required>
                             <option value="">Pilih Paket Travel</option>
                             @foreach ($travelpackages as $item)                            
-                                <option value="{{ $item->id }}" {{ $gallery->travelpackages_id == $item->id ? 'selected' : '' }}>{{ $item->title }}</option>    
+                                <option value="{{ $item->id }}" {{ $gallery->travelpackages_id == $item->id ? 'selected' : '' }}>{{ $item->title }}</option>
                             @endforeach
                         </select>
                     </div>

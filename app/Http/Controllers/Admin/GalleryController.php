@@ -7,7 +7,6 @@ use App\Gallery;
 use App\Http\Requests\Admin\GalleryRequest;
 use App\TravelPackage;
 use File;
-use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -69,9 +68,9 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        $gallery = Gallery::with('travelpackages')->findOrFail($id);
+        $gallery = Gallery::findOrFail($id);
+        dd($gallery);
         $travelpackages = TravelPackage::all();
-        
         return view('pages.admin.gallery.edit',[
             'gallery' => $gallery,
             'travelpackages' => $travelpackages
