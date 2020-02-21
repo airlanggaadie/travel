@@ -18,7 +18,7 @@
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/details', 'DetailController@index')->name('detail');
+Route::get('/details/{slug}', 'DetailController@index')->name('detail');
 Route::get('/checkout', 'CheckoutController@index')->name('checkout');
 Route::get('/checkout/success', 'CheckoutController@success')->name('success');
 
