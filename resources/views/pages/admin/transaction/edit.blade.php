@@ -30,7 +30,7 @@
                         <label for="transaction_status">Status</label>
                         <select name="transaction_status" required>
                             <option value="">Pilih Status</option>                                         
-                            <option value="IN_CHART" {{ $item->transaction_status == 'IN_CHART' ? 'selected' : '' }}>In Chart</option>
+                            <option value="IN_CART" {{ $item->transaction_status == 'IN_CART' ? 'selected' : '' }}>In Cart</option>
                             <option value="PENDING" {{ $item->transaction_status == 'PENDING' ? 'selected' : '' }}>Pending</option>
                             <option value="SUCCESS" {{ $item->transaction_status == 'SUCCESS' ? 'selected' : '' }}>Success</option>
                             <option value="CANCEL" {{ $item->transaction_status == 'CANCEL' ? 'selected' : '' }}>Cancel</option>
