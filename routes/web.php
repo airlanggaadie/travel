@@ -19,8 +19,11 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/details/{slug}', 'DetailController@index')->name('detail');
-Route::get('/checkout', 'CheckoutController@index')->name('checkout');
-Route::get('/checkout/success', 'CheckoutController@success')->name('success');
+Route::get('/checkout/{id}', 'CheckoutController@index')->name('checkout')->middleware(['auth','verified']);
+Route::post('/checkout/{id}','CheckoutController@process')->name('checkout-process')->middleware(['auth','verified']);
+Route::post('/checkout/create/{detail_id}', 'CheckoutController@create')->name('checkout-create')->middleware(['auth','verified']);
+Route::get('/checkout/remove/{detail_id}', 'CheckoutController@remove')->name('checkout-remove')->middleware(['auth','verified']);
+Route::get('/checkout/confirm/{id}', 'CheckoutController@success')->name('checkout-success')->middleware(['auth','verified']);
 
 Route::prefix('admin')->namespace('Admin')->middleware(['auth','admin'])->group(function ()
 {
